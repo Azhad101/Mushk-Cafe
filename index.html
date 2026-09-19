@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mushk Café | A Rooftop Evening in the Heart of Purani Dilli</title>
+  <meta name="description" content="Mushk is a rooftop sanctuary in Old Delhi overlooking Jama Masjid. Mughlai flavours, heritage architecture, and an unforgettable view under the night sky.">
+  <meta name="keywords" content="Mushk Cafe, Old Delhi, Jama Masjid rooftop, Purani Dilli cafe, Mughlai cuisine, Delhi heritage dining">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Mushk Café | Old Delhi Rooftop Experience">
+  <meta property="og:description" content="Where Old Delhi meets the night. Experience authentic Mughlai flavours overlooking Jama Masjid.">
+  <meta property="og:image" content="assets/images/hero-view.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23d6b56d'>🌙</text></svg>">
+
+  <!-- Google Fonts: Cormorant Garamond (Serif), Plus Jakarta Sans (UI Sans), Amiri (Urdu/Arabic accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Leaflet CSS for Dark Heritage Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       PRELOADER (< 0.8s Luxury reveal)
+       ======================================================================== -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <div class="preloader-calligraphy">مشک</div>
+      <div class="preloader-wordmark">MUSHK</div>
+      <div class="preloader-line-wrap">
+        <div class="preloader-line"></div>
+      </div>
+      <div class="preloader-sub">Purani Dilli · Jama Masjid</div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       NAVIGATION BAR
+       ======================================================================== -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-container">
+      <!-- Left: Brand -->
+      <a href="#hero" class="nav-brand" aria-label="Mushk Home">
+        <span class="brand-title">MUSHK</span>
+        <span class="brand-arabic">مشک</span>
+      </a>
+
+      <!-- Center: Links -->
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#view" class="nav-link">The View</a>
+        <a href="#cuisine" class="nav-link">Cuisine</a>
+        <a href="#atmosphere" class="nav-link">Atmosphere</a>
+        <a href="#story" class="nav-link">Our Story</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#visit" class="nav-link">Visit</a>
+      </nav>
+
+      <!-- Right: Actions -->
+      <div class="nav-actions">
+        <!-- Ambient Sound Toggle -->
+        <button class="audio-toggle-btn" id="audioToggle" aria-label="Toggle Night Ambient Sound">
+          <div class="audio-bars" aria-hidden="true">
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+            <span class="audio-bar"></span>
+          </div>
+          <span class="audio-label" id="audioLabel">Ambience</span>
+        </button>
+
+        <!-- Reserve CTA -->
+        <button class="btn-gold" id="navReserveBtn">
+          <span>Reserve</span>
+        </button>
+
+        <!-- Mobile Toggle -->
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-links">
+      <a href="#experience" class="mobile-link">Experience</a>
+      <a href="#view" class="mobile-link">The View</a>
+      <a href="#cuisine" class="mobile-link">Cuisine</a>
+      <a href="#atmosphere" class="mobile-link">Atmosphere</a>
+      <a href="#story" class="mobile-link">Our Story</a>
+      <a href="#gallery" class="mobile-link">Gallery</a>
+      <a href="#visit" class="mobile-link">Visit</a>
+    </div>
+    <button class="btn-gold" id="mobileReserveBtn" style="width: 220px;">
+      Reserve a Table
+    </button>
+  </div>
+
+  <main>
+    <!-- ======================================================================
+         HERO SECTION: A Full-Screen Cinematic Night in Purani Dilli
+         ====================================================================== -->
+    <section class="hero" id="hero">
+      <div class="hero-media">
+        <!-- Authentic Video Loop with Poster Fallback -->
+        <video class="hero-video" autoplay muted loop playsinline poster="assets/images/hero-view.jpg">
+          <source src="assets/video/Mushk.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="hero-overlay"></div>
+      <div class="hero-ornament-bg"></div>
+
+      <div class="hero-container">
+        <!-- Supporting Rooftop Badge -->
+        <div class="hero-badge">
+          <span class="hero-badge-dot"></span>
+          <span>Rooftop Sanctuary · Overlooking Jama Masjid</span>
+        </div>
+
+        <!-- Subtle Urdu Calligraphy Watermark -->
+        <div class="hero-calligraphy-watermark" aria-hidden="true">مشک</div>
+
+        <!-- Headline: MUSHK -->
+        <h1 class="hero-title">MUSHK</h1>
+
+        <!-- Small Supporting Line -->
+        <p class="hero-supporting">A Rooftop Evening in the Heart of Purani Dilli</p>
+
+        <div class="hero-divider" aria-hidden="true">
+          <span class="hero-divider-line"></span>
+          <span class="hero-divider-diamond"></span>
+          <span class="hero-divider-line"></span>
+        </div>
+
+        <!-- Short Poetic Line -->
+        <p class="hero-lead">
+          Old Delhi cuisine. Mughlai flavours.<br>
+          A view worth staying for.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="hero-ctas">
+          <a href="#experience" class="btn-gold">Explore Mushk</a>
+          <button class="btn-outline-gold" id="heroReserveBtn">Reserve a Table</button>
+        </div>
+      </div>
+
+      <!-- Subtle Scroll Indicator -->
+      <div class="hero-scroll" aria-hidden="true">
+        <span class="scroll-indicator-text">Descend</span>
+        <div class="scroll-indicator-line">
+          <span class="scroll-indicator-dot"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 01: THE EXPERIENCE
+         ====================================================================== -->
+    <section class="section section-experience" id="experience">
+      <div class="container">
+        <div class="experience-grid">
+          <!-- Text Content -->
+          <div class="experience-content">
+            <span class="section-label">Section 01 · The Experience</span>
+            <h2 class="section-heading">Where Old Delhi Meets the Night.</h2>
+            
+            <p class="experience-tagline">
+              An unhurried sanctuary above the historic alleys of Shahjahanabad.
+            </p>
+
+            <p class="experience-body">
+              Mushk brings together the flavours, architecture and atmosphere of Old Delhi in one rooftop experience. From the first step inside to the view of Jama Masjid above the rooftops, every detail should feel connected to the character of Purani Dilli.
+            </p>
+
+            <p class="experience-body">
+              Here, the aromas of hand-crushed saffron and slow-braised spices mingle with the evening breeze. Flickering brass candlelight illuminates carved wooden ceilings, while the call to prayer and the hum of Urdu Bazar gently drift beneath your feet.
+            </p>
+
+            <!-- Heritage Highlights -->
+            <div class="experience-pillars">
+              <div class="pillar-item">
+                <span class="pillar-bullet"></span>
+                <div>
+                  <h4 class="pillar-title">The Unrivalled Vantage</h4>
+                  <p class="pillar-desc">Direct line-of-sight to the monumental domes and 130-foot minarets of Jama Masjid, bathed in amber floodlights.</p>
+                </div>
+              </div>
+
+              <div class="pillar-item">
+                <span class="pillar-bullet"></span>
+                <div>
+                  <h4 class="pillar-title">Architectural Nostalgia</h4>
+                  <p class="pillar-desc">Carved teakwood jharokhas, cusped Mughal arches, and intimate crimson velvet dining alcoves.</p>
+                </div>
+              </div>
+
+              <div class="pillar-item">
+                <span class="pillar-bullet"></span>
+                <div>
+                  <h4 class="pillar-title">Intimate Gatherings</h4>
+                  <p class="pillar-desc">Soulful Sufi acoustic music under the stars, accompanied by heirloom Mughlai hospitality.</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <button class="btn-outline-gold" id="expReserveBtn">Experience Tonight</button>
+            </div>
+          </div>
+
+          <!-- Editorial Imagery -->
+          <div class="experience-imagery">
+            <div class="experience-img-main-wrap">
+              <img src="assets/images/arches-interior.jpg" alt="Mushk Interior Mughal cusped arches and carved wooden ceiling" class="experience-img-main" loading="lazy">
+              <div class="experience-caption-badge">Interior Salon · Chandelier Alcove</div>
+            </div>
+            <div class="experience-img-secondary-wrap">
+              <img src="assets/images/lantern-staircase.jpg" alt="Candlelit heritage staircase leading to Mushk rooftop" class="experience-img-secondary" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 02: THE VIEW
+         ====================================================================== -->
+    <section class="section section-view" id="view">
+      <div class="view-bg-parallax" id="viewParallaxBg"></div>
+      <div class="view-gradient-overlay"></div>
+
+      <div class="view-content">
+        <div class="view-badge">
+          <span>Jama Masjid · Old Delhi</span>
+        </div>
+
+        <h2 class="view-heading">Purani Dilli, From Above.</h2>
+        <p class="view-sub">An evening with the old city beneath you.</p>
+
+        <div class="pattern-divider">
+          <span class="pattern-divider-line"></span>
+          <span class="pattern-divider-icon">✦</span>
+          <span class="pattern-divider-line"></span>
+        </div>
+
+        <div class="view-landmarks">
+          <div class="landmark-item">
+            <span class="landmark-name">Jama Masjid</span>
+            <span class="landmark-meta">Completed 1656 AD · Directly Opposite</span>
+          </div>
+          <div class="landmark-item">
+            <span class="landmark-name">Urdu Bazar</span>
+            <span class="landmark-meta">Historic Culinary Gali · Below</span>
+          </div>
+          <div class="landmark-item">
+            <span class="landmark-name">Shahjahanabad Skyline</span>
+            <span class="landmark-meta">370 Years of Living Heritage</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 03: THE CUISINE
+         ====================================================================== -->
+    <section class="section section-cuisine" id="cuisine">
+      <div class="container">
+        <!-- Header -->
+        <div class="cuisine-header-block">
+          <span class="section-label">Section 03 · The Cuisine</span>
+          <h2 class="section-heading">Flavours of the Old City.</h2>
+          <p class="cuisine-lead">
+            Rooted in royal Mughal kitchens and refined through generations in Old Delhi’s galis. Each recipe honors slow-cooked tradition, fragrant whole spices, and ceremonial craftsmanship.
+          </p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="cuisine-tabs" role="tablist">
+          <button class="cuisine-tab active" data-category="all">All Offerings</button>
+          <button class="cuisine-tab" data-category="mughlai">Mughlai Delicacies</button>
+          <button class="cuisine-tab" data-category="favourites">Old Delhi Favourites</button>
+          <button class="cuisine-tab" data-category="signatures">Signature Dishes</button>
+          <button class="cuisine-tab" data-category="beverages">Beverages</button>
+          <button class="cuisine-tab" data-category="desserts">Desserts</button>
+        </div>
+
+        <!-- Featured Dish Editorial Banner -->
+        <div class="cuisine-hero-card">
+          <div class="cuisine-hero-media">
+            <img src="assets/images/cuisine-spread.jpg" alt="Artisanal Mughlai spread in antique copper handis and brass platters" class="cuisine-hero-img" loading="lazy">
+            <div class="cuisine-hero-badge">Featured Culinary Story</div>
+          </div>
+          <div class="cuisine-hero-info">
+            <span class="cuisine-hero-category">The Tradition of Dum & Copper</span>
+            <h3 class="cuisine-hero-title">Slow-Cooked Handi Pot Traditions</h3>
+            <p class="cuisine-hero-story">
+              In Purani Dilli, cooking is an act of patience. Sealed under dough and braised on gentle charcoal embers, our dishes capture the essence of saffron, green cardamom, and caramelized shallots. Served piping hot in hammered copper ware that keeps flavors intact to the last bite.
+            </p>
+            <div class="cuisine-meta-specs">
+              <div class="spec-item">
+                <span class="spec-label">Preparation</span>
+                <span class="spec-val">Dum Cooking (Pukht)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Service</span>
+                <span class="spec-val">Hammered Copper Handi</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Sourced</span>
+                <span class="spec-val">Khari Baoli Spice Bazaar</span>
+              </div>
+            </div>
+            <div>
+              <button class="btn-gold" id="openMenuDrawerBtn">Explore Full Tasting Menu</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dishes Featured Stories Grid -->
+        <div class="dishes-editorial-grid" id="dishesGrid">
+          <!-- Card 1 -->
+          <article class="dish-story-card" data-category="signatures">
+            <div>
+              <div class="dish-header">
+                <h4 class="dish-name">Signature Shahi Handi</h4>
+                <span class="dish-status">Signature Dish</span>
+              </div>
+              <p class="dish-desc">
+                Slow-simmered rich gravy infused with hand-crushed saffron, golden fried onions, mace, and velvety cream. Presented in an authentic lidded copper cauldron.
+              </p>
+            </div>
+            <div class="dish-footer">
+              <span class="dish-category-tag">Mughlai Speciality</span>
+              <span class="dish-note">Menu details coming soon</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="dish-story-card" data-category="mughlai">
+            <div>
+              <div class="dish-header">
+                <h4 class="dish-name">Dum Biryani e-Mushk</h4>
+                <span class="dish-status">Heirloom Recipe</span>
+              </div>
+              <p class="dish-desc">
+                Aged basmati rice layered with aromatic marinades, sealed under a delicate flour crust and cooked in its own steam over low flame.
+              </p>
+            </div>
+            <div class="dish-footer">
+              <span class="dish-category-tag">Dum Pukht</span>
+              <span class="dish-note">Menu details coming soon</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="dish-story-card" data-category="favourites">
+            <div>
+              <div class="dish-header">
+                <h4 class="dish-name">Smoked Galouti & Tawa Paratha</h4>
+                <span class="dish-status">Old Delhi Classic</span>
+              </div>
+              <p class="dish-desc">
+                Finely minced medallions seasoned with potli masala and cold-smoked with clove and ghee, served atop wafer-thin saffron ulta tawa paratha.
+              </p>
+            </div>
+            <div class="dish-footer">
+              <span class="dish-category-tag">Heritage Appetizer</span>
+              <span class="dish-note">Menu details coming soon</span>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="dish-story-card" data-category="favourites">
+            <div>
+              <div class="dish-header">
+                <h4 class="dish-name">Crisp Charcoal Tandoor Platter</h4>
+                <span class="dish-status">Clay Oven Craft</span>
+              </div>
+              <p class="dish-desc">
+                Charcoal-seared cuts basted with mustard oil, hung curd, and kashmiri deggi mirch, paired with freshly ground mint-coriander chutney.
+              </p>
+            </div>
+            <div class="dish-footer">
+              <span class="dish-category-tag">Tandoor Section</span>
+              <span class="dish-note">Menu details coming soon</span>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="dish-story-card" data-category="beverages">
+            <div>
+              <div class="dish-header">
+                <h4 class="dish-name">Kaffir Lime & Rooh Zafran Cooler</h4>
+                <span class="dish-status">Artisan Sip</span>
+              </div>
+              <p class="dish-desc">
+                Hand-shaken beverage with crushed garden mint, kiwi infusion, lime, and subtle floral essence served over mountain ice in a chilled copper tumbler.
+              </p>
+            </div>
+            <div class="dish-footer">
+              <span class="dish-category-tag">Beverage Craft</span>
+              <span class="dish-note">Menu details coming soon</span>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="dish-story-card" data-category="desserts">
+            <div>
+              <div class="dish-header">
+                <h4 class="dish-name">Zafrani Shahi Tukda</h4>
+                <span class="dish-status">Royal Finale</span>
+              </div>
+              <p class="dish-desc">
+                Crispy ghee-toasted bread steeped in thickened cardamom milk, topped with rich malai rabri, roasted pistachios, and pure silver vark.
+              </p>
+            </div>
+            <div class="dish-footer">
+              <span class="dish-category-tag">Royal Dessert</span>
+              <span class="dish-note">Menu details coming soon</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="cuisine-cta-row">
+          <button class="btn-outline-gold" id="viewFullMenuBtn">View Tasting Menu Details</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 04: THE MUSHK ATMOSPHERE
+         ====================================================================== -->
+    <section class="section section-atmosphere" id="atmosphere">
+      <div class="container-wide">
+        <div class="atmosphere-header">
+          <span class="section-label">Section 04 · Cinematic Ambiance</span>
+          <h2 class="section-heading">The Mushk Atmosphere.</h2>
+          <p class="section-lead">
+            Lantern-lit terraces, candlelit arches, and the gentle resonance of Sufi verse under the open Delhi sky.
+          </p>
+        </div>
+
+        <!-- 4 Key Atmosphere Vignettes -->
+        <div class="atmosphere-showcase-grid">
+          <!-- Vignette 1: THE ROOFTOP -->
+          <div class="atmosphere-card" data-lightbox="assets/images/hero-view.jpg" data-caption="THE ROOFTOP — Open sky, hanging lanterns & Jama Masjid backdrop">
+            <img src="assets/images/hero-view.jpg" alt="Mushk Rooftop open terrace at night" class="atmosphere-img" loading="lazy">
+            <div class="atmosphere-overlay">
+              <span class="atmosphere-caption-tag">The Rooftop</span>
+              <h3 class="atmosphere-caption-title">Stargazing Above Purani Dilli</h3>
+            </div>
+          </div>
+
+          <!-- Vignette 2: THE ARCHES -->
+          <div class="atmosphere-card" data-lightbox="assets/images/arches-interior.jpg" data-caption="THE ARCHES — Mughal scalloped cusped arches and carved wooden ceiling">
+            <img src="assets/images/arches-interior.jpg" alt="Carved arches and crystal chandelier at Mushk" class="atmosphere-img" loading="lazy">
+            <div class="atmosphere-overlay">
+              <span class="atmosphere-caption-tag">The Arches</span>
+              <h3 class="atmosphere-caption-title">Candlelit Jharokhas & Carved Teak</h3>
+            </div>
+          </div>
+
+          <!-- Vignette 3: THE TABLE -->
+          <div class="atmosphere-card" data-lightbox="assets/images/cuisine-spread.jpg" data-caption="THE TABLE — Steaming handis, warm candlelight and saffron aromas">
+            <img src="assets/images/cuisine-spread.jpg" alt="Tabletop with copper handi and candles at Mushk" class="atmosphere-img" loading="lazy">
+            <div class="atmosphere-overlay">
+              <span class="atmosphere-caption-tag">The Table</span>
+              <h3 class="atmosphere-caption-title">A Feast for the Senses</h3>
+            </div>
+          </div>
+
+          <!-- Vignette 4: THE SUFI NIGHT -->
+          <div class="atmosphere-card" data-lightbox="assets/images/sufi-performance.jpg" data-caption="THE NIGHT — Live acoustic Sufi & Qawwali performances">
+            <img src="assets/images/sufi-performance.jpg" alt="Live Sufi and acoustic performance at Mushk Cafe" class="atmosphere-img" loading="lazy">
+            <div class="atmosphere-overlay">
+              <span class="atmosphere-caption-tag">The Night</span>
+              <h3 class="atmosphere-caption-title">Live Sufi & Qawwali Evenings</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 05: OUR STORY
+         ====================================================================== -->
+    <section class="section section-story" id="story">
+      <div class="container">
+        <div class="story-grid">
+          <!-- Mughal Framed Image -->
+          <div class="story-frame-wrap">
+            <div class="story-ornament-border" aria-hidden="true"></div>
+            <div class="story-img-container">
+              <img src="assets/images/lantern-staircase.jpg" alt="Heritage staircase with candle illumination leading to Mushk rooftop" class="story-img" loading="lazy">
+            </div>
+          </div>
+
+          <!-- Story Text -->
+          <div class="story-content">
+            <span class="section-label">Section 05 · Our Heritage</span>
+            <h2 class="section-heading">Born in Purani Dilli.</h2>
+
+            <p class="story-prose">
+              In the heart of Shahjahanabad, where centuries of poets, artisans, and khansamas have lived and created, Mushk was envisioned as a living tribute to the historic spirit of Old Delhi.
+            </p>
+
+            <p class="story-prose">
+              Named after <em>Mushk</em> (مشک) — the rare, timeless fragrance that lingers long after a moment has passed — our rooftop is designed as a peaceful pause above the bustle of Urdu Bazar Road.
+            </p>
+
+            <div class="story-quote-block">
+              <p class="story-quote-text">
+                "Not just somewhere you eat. Somewhere you experience the living pulse and poetry of Old Delhi."
+              </p>
+              <span class="story-quote-author">— Mushk Philosophy</span>
+            </div>
+
+            <p class="story-prose">
+              Every arch was carved with respect for traditional Indo-Islamic craftsmanship; every copper vessel honors the slow culinary heritage of the Mughal court. When you ascend our stairs, you step into a night made for lingering conversations.
+            </p>
+
+            <div>
+              <button class="btn-outline-gold" id="storyReserveBtn">Join Our Table</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 06: GALLERY
+         ====================================================================== -->
+    <section class="section section-gallery" id="gallery">
+      <div class="container">
+        <div class="gallery-header">
+          <span class="section-label">Section 06 · Visual Chronicle</span>
+          <h2 class="section-heading">Glimpses of the Night.</h2>
+          <p class="section-lead">
+            A visual anthology of candlelit terraces, culinary crafts, and midnight skylines.
+          </p>
+        </div>
+
+        <!-- Filter Navigation -->
+        <div class="gallery-filter-nav">
+          <button class="gallery-filter-btn active" data-filter="all">All Vignettes</button>
+          <button class="gallery-filter-btn" data-filter="skyline">Skyline & Rooftop</button>
+          <button class="gallery-filter-btn" data-filter="architecture">Architecture</button>
+          <button class="gallery-filter-btn" data-filter="cuisine">Cuisine</button>
+          <button class="gallery-filter-btn" data-filter="evenings">Evening Mood</button>
+        </div>
+
+        <!-- Asymmetric Editorial Gallery Grid -->
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Item 1: Wide Hero View (Span 8) -->
+          <div class="gallery-item col-span-8" data-category="skyline" data-lightbox="assets/images/hero-view.jpg" data-caption="Mushk Rooftop dining overlooking the illuminated Jama Masjid">
+            <img src="assets/images/hero-view.jpg" alt="Rooftop dining view of Jama Masjid" class="gallery-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-caption-tag">Skyline & Terrace</span>
+              <h4 class="gallery-caption-title">The Rooftop at Midnight</h4>
+            </div>
+          </div>
+
+          <!-- Item 2: Arches Interior (Span 4) -->
+          <div class="gallery-item col-span-4" data-category="architecture" data-lightbox="assets/images/arches-interior.jpg" data-caption="Carved Mughal scalloped arches and velvet drapery">
+            <img src="assets/images/arches-interior.jpg" alt="Arched interior dining" class="gallery-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-caption-tag">Architecture</span>
+              <h4 class="gallery-caption-title">Carved Teak Jharokhas</h4>
+            </div>
+          </div>
+
+          <!-- Item 3: Cuisine Spread (Span 6) -->
+          <div class="gallery-item col-span-6" data-category="cuisine" data-lightbox="assets/images/cuisine-spread.jpg" data-caption="Mughlai delicacies served in hammered copper and brass">
+            <img src="assets/images/cuisine-spread.jpg" alt="Mughlai feast" class="gallery-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-caption-tag">Cuisine</span>
+              <h4 class="gallery-caption-title">Flavours of Dum & Copper</h4>
+            </div>
+          </div>
+
+          <!-- Item 4: Sufi Evening (Span 6) -->
+          <div class="gallery-item col-span-6" data-category="evenings" data-lightbox="assets/images/sufi-performance.jpg" data-caption="Live acoustic Sufi and Qawwali musical evening at Mushk">
+            <img src="assets/images/sufi-performance.jpg" alt="Live Sufi performance" class="gallery-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-caption-tag">Evening Mood</span>
+              <h4 class="gallery-caption-title">Soulful Sufi Resonance</h4>
+            </div>
+          </div>
+
+          <!-- Item 5: Panoramic Skyline (Span 8) -->
+          <div class="gallery-item col-span-8" data-category="skyline" data-lightbox="assets/images/skyline-panorama.jpg" data-caption="Panoramic twilight view across Old Delhi rooftops toward Jama Masjid">
+            <img src="assets/images/skyline-panorama.jpg" alt="Panorama of Old Delhi" class="gallery-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-caption-tag">Skyline</span>
+              <h4 class="gallery-caption-title">Twilight Over Shahjahanabad</h4>
+            </div>
+          </div>
+
+          <!-- Item 6: Heritage Staircase (Span 4) -->
+          <div class="gallery-item col-span-4" data-category="architecture" data-lightbox="assets/images/lantern-staircase.jpg" data-caption="Flickering candles and brass lanterns on the heritage stairway">
+            <img src="assets/images/lantern-staircase.jpg" alt="Candlelit staircase" class="gallery-img" loading="lazy">
+            <div class="gallery-item-overlay">
+              <span class="gallery-caption-tag">Heritage Entrance</span>
+              <h4 class="gallery-caption-title">The Ascending Stairway</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 07: VISIT MUSHK (DESTINATION)
+         ====================================================================== -->
+    <section class="section section-visit" id="visit">
+      <div class="container">
+        <div class="visit-grid">
+          <!-- Information Card -->
+          <div class="visit-info-card">
+            <span class="section-label">Section 07 · Destination</span>
+            <h2 class="visit-heading">Come Find Us in the Heart of Old Delhi.</h2>
+            
+            <p class="section-lead" style="font-size: 0.95rem; margin-bottom: 1.5rem;">
+              Located on historic Urdu Bazar Road, right opposite Gate No. 1 of Jama Masjid. An easy walk from Jama Masjid and Chawri Bazar Metro Stations.
+            </p>
+
+            <div class="visit-details-list">
+              <!-- Address -->
+              <div class="visit-detail-item">
+                <div class="visit-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div class="visit-detail-text">
+                  <span class="detail-label">Address</span>
+                  <p class="detail-val">4179, Urdu Bazar Road, Old Delhi, Jama Masjid</p>
+                  <span class="detail-sub">Daryaganj, Delhi 110006 · Opposite Gate No. 1</span>
+                </div>
+              </div>
+
+              <!-- Contact -->
+              <div class="visit-detail-item">
+                <div class="visit-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                  </svg>
+                </div>
+                <div class="visit-detail-text">
+                  <span class="detail-label">Telephone</span>
+                  <a href="tel:09800051110" class="detail-val" style="color: var(--gold-soft);">098000 51110</a>
+                  <span class="detail-sub">Direct café inquiries & rooftop reservations</span>
+                </div>
+              </div>
+
+              <!-- Hours -->
+              <div class="visit-detail-item">
+                <div class="visit-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div class="visit-detail-text">
+                  <span class="detail-label">Operating Hours</span>
+                  <p class="detail-val">Open until 12:00 AM Midnight</p>
+                  <span class="detail-sub">Daily: 5:00 PM to 12:00 AM · Dinner & Late Night</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="visit-actions-row">
+              <a href="https://maps.google.com/?q=Mushk+Cafe+Urdu+Bazar+Old+Delhi+Jama+Masjid" target="_blank" rel="noopener noreferrer" class="btn-gold">
+                Get Directions
+              </a>
+              <a href="tel:09800051110" class="btn-outline-gold">
+                Call Mushk
+              </a>
+              <button class="btn-outline-gold" id="visitReserveBtn">
+                Reserve a Table
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Dark Map -->
+          <div class="visit-map-wrap">
+            <div class="map-card-badge">
+              <span class="map-card-badge-dot"></span>
+              <span>Live Location · Urdu Bazar</span>
+            </div>
+            <div id="mushk-map"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         FINAL SECTION: SEE YOU UNDER THE OLD DELHI SKY
+         ====================================================================== -->
+    <section class="section-skyline-closing">
+      <div class="closing-ornament" aria-hidden="true">مشک</div>
+
+      <h2 class="closing-title">SEE YOU UNDER THE OLD DELHI SKY.</h2>
+      
+      <div class="closing-wordmark">MUSHK</div>
+
+      <div class="closing-meta-grid">
+        <div class="closing-meta-item">
+          <span class="closing-meta-label">Address</span>
+          <span class="closing-meta-val">4179, Urdu Bazar Road, Jama Masjid, Delhi 110006</span>
+        </div>
+
+        <div class="closing-meta-item">
+          <span class="closing-meta-label">Direct Contact</span>
+          <span class="closing-meta-val"><a href="tel:09800051110">098000 51110</a></span>
+        </div>
+
+        <div class="closing-meta-item">
+          <span class="closing-meta-label">Hours</span>
+          <span class="closing-meta-val">5:00 PM — 12:00 AM Daily</span>
+        </div>
+
+        <div class="closing-meta-item">
+          <span class="closing-meta-label">Instagram</span>
+          <span class="closing-meta-val"><a href="https://instagram.com" target="_blank" rel="noopener">@mushkdelhi</a></span>
+        </div>
+      </div>
+
+      <p class="closing-copyright">
+        Old Delhi · India &nbsp;|&nbsp; Mushk Café Concept & Redesign &nbsp;|&nbsp; All Rights Reserved.
+      </p>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       MODAL: TABLE RESERVATION
+       ======================================================================== -->
+  <div class="modal-backdrop" id="reservationModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" id="closeReserveModal" aria-label="Close Reservation Modal">✕</button>
+
+      <span class="section-label">Rooftop Bookings</span>
+      <h3 class="modal-title">Reserve Your Table</h3>
+      <p class="modal-sub">Experience an intimate rooftop evening overlooking Jama Masjid.</p>
+
+      <form class="reservation-form" id="reservationForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="resName">Full Name</label>
+            <input type="text" id="resName" class="form-input" placeholder="e.g. Asad Farooqi" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="resPhone">Phone Number</label>
+            <input type="tel" id="resPhone" class="form-input" placeholder="+91 98000 51110" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="resDate">Select Date</label>
+            <input type="date" id="resDate" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="resTime">Select Time Slot</label>
+            <select id="resTime" class="form-select" required>
+              <option value="">Choose an hour...</option>
+              <option value="17:30">5:30 PM — Sunset & Twilight</option>
+              <option value="19:00">7:00 PM — Evening Floodlights</option>
+              <option value="20:30">8:30 PM — Prime Dining Hour</option>
+              <option value="22:00">10:00 PM — Midnight Stargazing</option>
+              <option value="23:00">11:00 PM — Late Night Sips</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="resGuests">Number of Guests</label>
+            <select id="resGuests" class="form-select" required>
+              <option value="2">2 Guests (Intimate Table)</option>
+              <option value="3">3 - 4 Guests (Standard Table)</option>
+              <option value="6">5 - 8 Guests (Family Cabana)</option>
+              <option value="10">9+ Guests (Private Gathering)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="resSeating">Seating Preference</label>
+            <select id="resSeating" class="form-select">
+              <option value="terrace">Rooftop Skyline (Direct View of Jama Masjid)</option>
+              <option value="alcove">Carved Archway Alcove (Intimate)</option>
+              <option value="indoor">Indoor Chandelier Salon</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="resNotes">Special Requests or Occasion (Optional)</label>
+          <input type="text" id="resNotes" class="form-input" placeholder="Anniversary, Sufi night preference, dietary notes...">
+        </div>
+
+        <button type="submit" class="btn-gold" style="width: 100%; margin-top: 0.5rem;">
+          Confirm Reservation Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- ========================================================================
+       MODAL: CINEMATIC LIGHTBOX
+       ======================================================================== -->
+  <div class="modal-backdrop" id="lightboxModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="lightbox-dialog">
+      <button class="modal-close-btn" id="closeLightboxModal" aria-label="Close Lightbox" style="position: absolute; top: -2.5rem; right: 0;">✕</button>
+      <div class="lightbox-img-wrap">
+        <img src="" alt="Enlarged gallery view" id="lightboxImage" class="lightbox-img">
+      </div>
+      <div class="lightbox-caption-bar" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       DRAWER: FULL TASTING MENU
+       ======================================================================== -->
+  <div class="menu-drawer" id="menuDrawer" aria-hidden="true">
+    <div class="menu-drawer-header">
+      <div>
+        <span class="section-label">Culinary Anthology</span>
+        <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--text-ivory);">The Mushk Tasting Menu</h3>
+      </div>
+      <button class="modal-close-btn" id="closeMenuDrawer" aria-label="Close Menu Drawer">✕</button>
+    </div>
+    <div class="menu-drawer-body">
+      <p style="font-size: 0.88rem; color: var(--text-cream); line-height: 1.7; margin-bottom: 1.5rem;">
+        Every delicacy is prepared using heirloom recipes from Shahjahanabad. Below is a structural preview of our seasonal courses; full culinary pricing will be unveiled at service.
+      </p>
+
+      <h4 class="drawer-section-title">I. Shahi Dastarkhwan (Signatures)</h4>
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Nalli Nihari Roghan</span>
+          <span class="drawer-item-price">Signature Selection</span>
+        </div>
+        <p class="drawer-item-desc">Slow-braised tender shanks infused overnight with potli masalas and saffron.</p>
+      </div>
+
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Dum Murgh Mussallam</span>
+          <span class="drawer-item-price">Signature Selection</span>
+        </div>
+        <p class="drawer-item-desc">Whole slow-roasted chicken basted in almond gravy, stuffed with spiced eggs and rice.</p>
+      </div>
+
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Paneer Zafrani Korma</span>
+          <span class="drawer-item-price">Vegetarian Classic</span>
+        </div>
+        <p class="drawer-item-desc">Silken cottage cheese simmered in cream, poppy seeds, and Persian saffron reduction.</p>
+      </div>
+
+      <h4 class="drawer-section-title">II. Tandoor & Galis of Purani Dilli</h4>
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Bhatti Murgh Tikka</span>
+          <span class="drawer-item-price">Charcoal Roasted</span>
+        </div>
+        <p class="drawer-item-desc">Smoked in traditional earthen tandoors with black cardamom and crushed spices.</p>
+      </div>
+
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Khamiri Roti & Sheermal</span>
+          <span class="drawer-item-price">Traditional Breads</span>
+        </div>
+        <p class="drawer-item-desc">Leavened Mughal bread brushed with clarified butter and sweet saffron milk.</p>
+      </div>
+
+      <h4 class="drawer-section-title">III. Artisan Sips & Elixirs</h4>
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Dilli 6 Sharbat-e-Gulab</span>
+          <span class="drawer-item-price">Heirloom Cooler</span>
+        </div>
+        <p class="drawer-item-desc">Pure wild Damask rose reduction with basil seeds and chilled almond milk.</p>
+      </div>
+
+      <div class="drawer-menu-item">
+        <div class="drawer-item-head">
+          <span class="drawer-item-name">Kashmiri Kahwa & Saffron Brew</span>
+          <span class="drawer-item-price">Hot Beverage</span>
+        </div>
+        <p class="drawer-item-desc">Green tea leaves brewed with cinnamon bark, cardamom pods, and crushed almonds.</p>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(9, 7, 6, 0.6); border: 1px solid var(--gold-border); border-radius: 2px;">
+        <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--gold-antique); display: block; margin-bottom: 0.4rem;">Dietary & Heritage Note</span>
+        <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">
+          All meat preparations strictly adhere to authentic halal culinary traditions. Sourced daily from Old Delhi's prime purveyors.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Main Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>
